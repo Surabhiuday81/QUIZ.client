@@ -2,8 +2,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  // baseURL: "http://localhost:5000/api",
-  baseURL: "https://quiz-server-m7bp.onrender.com/",
+  // **FIXED:** Added the '/api' route prefix to match typical backend setups.
+  baseURL: "https://quiz-server-m7bp.onrender.com/api",
   timeout: 15000,
 });
 
@@ -15,12 +15,14 @@ API.interceptors.request.use((config) => {
 });
 
 export async function generateQuiz(payload) {
+  // Now calls: https://quiz-server-m7bp.onrender.com/api/quizzes/generate
   const res = await API.post("/quizzes/generate", payload);
   return res.data;
 }
 
 /* Auth endpoints */
 export async function register(payload) {
+  // Now calls: https://quiz-server-m7bp.onrender.com/api/auth/register
   const res = await API.post("/auth/register", payload);
   return res.data;
 }
@@ -34,7 +36,8 @@ export async function saveQuiz(payload) {
   const res = await API.post("/quizzes", payload);
   return res.data;
 }
-// client/src/api/api.js  (additions at bottom)
+
+// client/src/api/api.js
 export async function startSession(quizId) {
   const res = await API.post(`/sessions/quizzes/${quizId}/start`);
   return res.data;
