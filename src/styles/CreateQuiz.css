@@ -1,0 +1,483 @@
+/* /*
+|--------------------------------------------------------------------------
+| VARIABLES (Ensure compatibility with global dark theme)
+|--------------------------------------------------------------------------
+*/
+
+:root {
+    /* Light Mode Base */
+    --accent: #2563eb;
+    --success: #10b981;
+    --text-heading: #1e293b;
+    --text-body: #334155;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --card: #ffffff;
+    --bg: #f7f9fb; /* Input/Subtle background */
+    --shadow-input: 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-panel: 0 10px 30px rgba(0,0,0,0.05);
+    --radius-xl: 16px;
+
+    /* Theme-specific variables used by the component */
+    --form-bg: var(--bg); /* Input background */
+    --panel-bg: var(--card); /* Main card background */
+    --preview-bg: var(--f7f9fb); /* Preview contrast background */
+}
+
+/* Dark Mode Overrides (Assumes html.dark class is applied by Navbar) */
+html.dark {
+    --text-heading: #e2e8f0;
+    --text-body: #cbd5e1;
+    --muted: #94a3b8;
+    --border: #334155; /* Darker border */
+    --card: #1c273e; /* Dark panel background */
+    --bg: #0d1a2f; /* Main app background */
+    
+    --form-bg: #0f172a; /* Darker input background */
+    --panel-bg: var(--card);
+    --preview-bg: #1c273e; /* Darker preview contrast */
+} */
+
+/*
+|--------------------------------------------------------------------------
+| LAYOUT & CONTAINERS
+|--------------------------------------------------------------------------
+*/
+
+.app-container-max {
+    /* Utilizing max-width defined in global layout context (e.g., 1400px) */
+    max-width: 1400px; /* Keeping wide, but contents will stack */
+    margin: 30px auto;
+    padding: 0 20px 80px;
+}
+
+.header-impact {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: var(--text-heading);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+}
+
+.card-panel-xlarge {
+    background: var(--panel-bg); /* Use panel variable */
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 30px; 
+    box-shadow: var(--shadow-panel);
+    margin-bottom: 40px;
+}
+
+.section-header-xlarge {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-top: 50px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| FORM ELEMENTS - FORCED VERTICAL STACKING
+|--------------------------------------------------------------------------
+*/
+
+.form-layout-grid-gap {
+    /* FIX 1: Reduce vertical gap between form groups */
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 10px 0; /* Reduced from 20px */
+}
+
+.form-group-padded {
+    /* FIX 2: Reduce vertical padding inside each form group */
+    padding: 5px 0; /* Reduced from 10px */
+    display: flex;
+    flex-direction: column;
+}
+
+.label-large {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Base Input/Select Styles - CRITICAL DARK MODE FIXES */
+.input-glow, .select-large {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--form-bg); /* Use form-bg for input background */
+    color: var(--text-body);
+    font-size: 1rem;
+    box-shadow: var(--shadow-input);
+    transition: all 0.2s ease;
+}
+
+/* Glow Effect */
+.input-glow:focus, .select-large:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); 
+    outline: none;
+}
+
+.select-large {
+    /* Ensure select arrow visibility */
+    appearance: none; 
+    /* Dark Mode Arrow Fix: Use a dynamic/inverted SVG or rely on dark theme color vars */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="%2364748b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 5l6 6 6-6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+.hint-small {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.separator-line-subtle {
+    /* FIX: Ensure separator spans full width and acts as a block */
+    grid-column: 1 / -1; 
+    height: 1px;
+    background: transparent;
+    margin: 10px 0;
+}
+
+/* Checkbox Toggle Switch (Simplified) */
+.checkbox-toggle-switch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-body);
+}
+
+.checkbox-input-hidden {
+    /* Hiding the native checkbox */
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.checkbox-slider-round {
+    width: 40px;
+    height: 20px;
+    background-color: var(--border);
+    border-radius: 20px;
+    position: relative;
+    margin-right: 15px;
+    transition: background-color 0.4s;
+    flex-shrink: 0;
+}
+
+.checkbox-slider-round:before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--card); /* Should always be card color */
+    left: 3px;
+    bottom: 3px;
+    transition: transform 0.4s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.checkbox-input-hidden:checked + .checkbox-slider-round {
+    background-color: var(--accent);
+}
+
+.checkbox-input-hidden:checked + .checkbox-slider-round:before {
+    transform: translateX(20px);
+}
+
+/*
+|--------------------------------------------------------------------------
+| ACTION BAR & BUTTONS
+|--------------------------------------------------------------------------
+*/
+
+.action-bar-sticky-prominent {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--panel-bg); /* Use panel variable */
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+    z-index: 40;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.action-buttons-wide {
+    /* FIX: Force buttons to stack vertically if screen is narrow, otherwise fill */
+    display: flex;
+    flex-direction: column; /* Force stack */
+    gap: 10px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.button-tray-wide {
+    /* FIX: Ensure button tray itself stacks and spans full width */
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column; /* Force stack */
+    gap: 15px;
+    padding-top: 10px;
+}
+
+.button-action {
+    padding: 14px 25px; /* Large, clickable area */
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    flex-grow: 1;
+}
+
+/* Primary Generate Button */
+.button-generate-primary {
+    background-color: var(--accent);
+    color: white;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+}
+.button-generate-primary:hover {
+    background-color: #1e56cb;
+}
+.button-generate-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Publish Button (Strong Accent) */
+.button-publish-accent {
+    background-color: var(--success);
+    color: white;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+.button-publish-accent:hover {
+    background-color: #0d996a;
+}
+
+/* Ghost Buttons - Dark Mode Fixes */
+.button-ghost-secondary {
+    background: none;
+    color: var(--muted);
+    border: 1px solid var(--border);
+}
+.button-ghost-secondary:hover {
+    background: var(--form-bg); /* Use input background for subtle hover */
+}
+
+.button-ghost-primary {
+    background: none;
+    color: var(--text-heading);
+    border: 1px solid var(--border);
+}
+.button-ghost-primary:hover {
+    background: var(--form-bg);
+}
+
+.button-text-subtle {
+    background: none;
+    color: var(--muted);
+    border: none;
+}
+.button-text-subtle:hover {
+    color: var(--text-heading);
+}
+
+/* Share Button */
+.button-icon-primary {
+    padding: 12px 18px;
+    background: var(--accent);
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.button-icon-primary:hover {
+    background: #1e56cb;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MESSAGES & PREVIEW
+|--------------------------------------------------------------------------
+*/
+
+.alert-error-prominent {
+    padding: 15px;
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.divider-prominent {
+    border-top: 2px solid var(--border);
+    margin: 40px 0;
+}
+
+.placeholder-content {
+    text-align: center;
+    padding: 50px;
+    font-style: italic;
+    color: var(--muted);
+    background: var(--form-bg); /* Use input background */
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+}
+
+/* Preview Content */
+.preview-content-high-contrast {
+    padding: 20px;
+    background: var(--form-bg); /* Lighter panel for contrast */
+    border-radius: 12px;
+}
+
+.preview-title-large {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-bottom: 5px;
+}
+
+.preview-description-muted {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+
+.question-list-grid {
+    /* FIX: Force stacking of question cards */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.question-card-minimal {
+    padding: 15px;
+    border-radius: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.question-number-badge {
+    font-weight: 800;
+    color: var(--accent);
+    margin-right: 8px;
+}
+
+.question-text-bold {
+    font-weight: 600;
+    display: inline;
+    color: var(--text-body);
+}
+
+.choices-list-compact {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0 0 0;
+    font-size: 0.95rem;
+}
+
+.choice-item-list {
+    margin-bottom: 4px;
+    color: var(--muted);
+}
+
+.choice-marker-subtle {
+    font-weight: 700;
+    color: var(--text-body);
+    margin-right: 5px;
+}
+
+/* Share Link Info */
+.share-link-card-prominent {
+    padding: 20px;
+    background: #ecfdf5; /* Success background (Light mode) */
+    border: 2px solid var(--success);
+    border-radius: 12px;
+    margin-top: 30px;
+    color: #065f46;
+}
+
+html.dark .share-link-card-prominent {
+    background: #1e3f3b; /* Dark success background */
+    color: var(--success);
+    border-color: var(--success);
+}
+
+html.dark .share-link-card-prominent .share-input-prominent {
+    background: #0f172a;
+    color: var(--text-body);
+}
+
+.share-header-bold {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.share-details-flex {
+    /* FIX: Ensure share details stack on smaller screens if necessary, though it should stay horizontal */
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    align-items: stretch;
+}
+
+.share-input-prominent {
+    flex-grow: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--success);
+    background: #fff; /* Light mode */
+    font-size: 0.9rem;
+    user-select: all;
+    cursor: text;
+}
+
+.share-expiry-text-highlight {
+    color: #065f46;
+    margin-top: 10px;
+}
+
+/* Responsive adjustment to keep action buttons horizontal on wider screens */
+@media (min-width: 768px) {
+    .action-buttons-wide {
+        flex-direction: row; /* Horizontal on wider screens */
+    }
+    .button-tray-wide {
+        flex-direction: row; /* Horizontal button tray */
+    }
+    .share-details-flex {
+        flex-direction: row; /* Horizontal share details */
+        align-items: center;
+    }
+}

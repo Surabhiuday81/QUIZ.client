@@ -1,0 +1,276 @@
+/* Custom properties for consistency */
+:root {
+    --color-primary: #2563eb;
+    --color-primary-light: #eef2ff;
+    --color-error: #b91c1c;
+    --color-error-light: #fee2e2;
+    --color-warning: #fcd34d;
+    --color-warning-light: #fff7ed;
+    --color-border: rgba(2, 6, 23, 0.08); /* Equivalent to #eee or rgba(2,6,23,0.08) */
+    --color-text-muted: #64748b;
+    --color-text-dark: #333; /* Added: A dark color for general text */
+    --color-shadow-input: inset 0 1px 0 rgba(0, 0, 0, 0.02);
+  }
+  
+  /* Base styles for the main container */
+  .quiz-player-container {
+    max-width: 900px;
+    margin: 18px auto;
+    padding: 0 12px;
+    color: var(--color-text-dark); /* Ensure overall text is dark */
+  }
+  
+  /* Loading and Error States */
+  .quiz-loading {
+    padding: 20px;
+  }
+  
+  .quiz-error-message {
+    background: var(--color-error-light);
+    color: var(--color-error);
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .quiz-error-message + button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    color: var(--color-text-dark); /* Ensure button text is dark */
+    background-color: white; /* Explicitly set background if needed */
+  }
+  
+  /* Header and Timer */
+  .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .quiz-header h2 {
+    margin: 0;
+    color: var(--color-text-dark); /* Ensure heading is dark */
+  }
+  
+  .quiz-header-info {
+    color: var(--color-text-muted);
+  }
+  
+  .quiz-timer-block {
+    text-align: right;
+    width: 220px;
+  }
+  
+  .quiz-timer-label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+  
+  .quiz-timer-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-text-dark); /* Ensure timer value is dark */
+  }
+  
+  .quiz-progress-bar-container {
+    margin-top: 8px;
+    height: 8px;
+    background: rgba(2, 6, 23, 0.06);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .quiz-progress-bar {
+    height: 100%;
+    background: var(--color-primary);
+    transition: width 700ms linear;
+  }
+  
+  .quiz-progress-bar.warning {
+    background: #ef4444; /* Equivalent to progressPct <= 10 color */
+  }
+  
+  /* Warning messages */
+  .quiz-warning-60 {
+    background: var(--color-warning-light);
+    border: 1px solid var(--color-warning);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    color: var(--color-text-dark); /* Ensure warning text is dark */
+  }
+  
+  .quiz-warning-10 {
+    background: var(--color-error-light);
+    border: 1px solid #f87171; /* Slightly more aggressive red border */
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    color: var(--color-text-dark); /* Ensure warning text is dark */
+  }
+  
+  /* Question List Container */
+  .quiz-questions-list {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* --- QuestionBlock Styles --- */
+  
+  .question-block {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: var(--color-text-dark); /* Ensure question text is dark */
+  }
+  
+  .question-block:last-child {
+    border-bottom: none; /* Remove border from the last item */
+  }
+  
+  .question-text {
+    margin-bottom: 8px;
+  }
+  
+  /* MCQ/TF Button Base */
+  .quiz-choice-button {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: white;
+    cursor: pointer;
+    transition: all 150ms ease;
+    color: var(--color-text-dark); /* ADDED: Ensure text is visible */
+  }
+  
+  .quiz-choice-button:not(:disabled):hover {
+      border-color: var(--color-primary);
+  }
+  
+  .quiz-choice-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  /* MCQ Options Grid */
+  .mcq-choices-grid {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .mcq-choice-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+  }
+  
+  .mcq-choice-content {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .mcq-choice-letter {
+    min-width: 28px;
+    text-align: center;
+    font-weight: 700;
+  }
+  
+  /* Selected state for MCQ/TF */
+  .quiz-choice-button.selected {
+    border: 2px solid var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-text-dark); /* Ensure selected text is also visible */
+  }
+  
+  .quiz-choice-check {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+  
+  /* TF Options Flex */
+  .tf-choices-flex {
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* Short Answer (Text) */
+  .short-answer-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    outline: none;
+    box-shadow: var(--color-shadow-input);
+    transition: border-color 150ms ease;
+    color: var(--color-text-dark); /* Ensure input text is dark */
+  }
+  
+  .short-answer-input::placeholder {
+      color: var(--color-text-muted); /* Make placeholder visible */
+  }
+  
+  .short-answer-input:focus:not(:disabled) {
+      border-color: var(--color-primary);
+  }
+  
+  .short-answer-input:disabled {
+      cursor: not-allowed;
+      background-color: #f7f7f7;
+  }
+  
+  .short-answer-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+  
+  /* --- Footer/Action Bar Styles --- */
+  
+  .quiz-action-bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 12px;
+  }
+  
+  .submit-button {
+    padding: 8px 12px;
+    background: var(--color-primary);
+    color: #fff; /* White text for primary button */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .submit-button:disabled {
+    background: var(--color-text-muted);
+    cursor: not-allowed;
+    color: #fff; /* Ensure disabled submit text is also white */
+  }
+  
+  .exit-button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: white;
+    cursor: pointer;
+    color: var(--color-text-dark); /* Ensure exit button text is dark */
+  }
+  
+  /* Saving State */
+  .saving-state-info {
+    margin-left: 12px;
+    font-size: 13px;
+    color: var(--color-text-dark); /* Ensure saving info text is dark */
+  }
+  
+  .saving-state-error {
+    color: var(--color-error);
+    margin-left: 8px;
+  }

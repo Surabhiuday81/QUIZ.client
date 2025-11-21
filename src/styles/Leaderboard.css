@@ -1,0 +1,194 @@
+/*
+|--------------------------------------------------------------------------
+| LEADERBOARD PAGE STYLES
+|--------------------------------------------------------------------------
+*/
+
+:root {
+  /* Using variables defined in your global CSS */
+  --color-primary: #007bff;
+  --color-accent: #28a745; 
+  --color-text: #333;
+  --color-text-muted: #6c757d;
+  --color-background: #f4f7f9;
+  --color-card-bg: #ffffff;
+  --color-shadow-light: rgba(0, 0, 0, 0.05); /* Light shadow */
+  --color-shadow-medium: rgba(0, 0, 0, 0.1); /* Medium shadow for hover */
+  --color-separator: rgba(0, 0, 0, 0.08);
+  --color-gold: #ffc107;
+  --color-silver: #adb5bd;
+  --color-bronze: #fd7e14;
+  --radius-large: 10px; 
+}
+
+.leaderboard-container {
+    max-width: 1000px; /* Increased max width */
+    margin: 40px auto; /* Increased margin */
+    padding: 0 20px;
+}
+  
+.leaderboard-header {
+    font-size: 2rem; /* Larger, more impactful */
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-align: left; /* Aligned left for modern flow */
+    color: var(--color-primary, #007bff);
+    border-bottom: 2px solid var(--color-separator);
+    padding-bottom: 10px;
+}
+  
+.loading-state {
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--color-text-muted, #6c757d);
+    padding: 20px 0;
+}
+  
+.alert-error-prominent {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 15px;
+    border-radius: var(--radius-large);
+    text-align: center;
+    margin: 20px 0;
+}
+  
+.user-rank-display {
+    margin: 25px 0;
+    padding: 15px;
+    background: var(--color-card-bg);
+    border-radius: var(--radius-large);
+    box-shadow: 0 4px 10px var(--color-shadow-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--color-text, #333);
+}
+  
+.user-rank-display strong {
+    color: var(--color-accent, #28a745);
+    font-size: 1.2em;
+    font-weight: 800;
+}
+  
+.card-empty-state {
+    padding: 20px;
+    border-radius: var(--radius-large);
+    background: #fff;
+    border: 1px dashed #c0c9d6;
+    text-align: center;
+    margin-top: 20px;
+}
+  
+.card-empty-state p {
+    margin: 0 0 5px 0;
+}
+  
+.text-muted-small {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+  
+/*
+|--------------------------------------------------------------------------
+| LEADERBOARD LIST STYLES
+|--------------------------------------------------------------------------
+*/
+  
+.leaderboard-list {
+    padding-left: 0;
+    list-style: none;
+    background: var(--color-card-bg);
+    border-radius: var(--radius-large);
+    box-shadow: 0 6px 16px var(--color-shadow-light);
+    overflow: hidden; /* Contains the border-radius */
+}
+  
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px; /* Increased padding */
+    border-bottom: 1px solid #f1f5f9;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+  
+.leaderboard-item:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px var(--color-shadow-medium);
+}
+
+.leaderboard-item:last-child {
+    border-bottom: none;
+}
+  
+.leaderboard-item-left {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Increased gap */
+}
+  
+.rank-number {
+    font-weight: 800;
+    font-size: 1.3rem; /* Prominent rank */
+    width: 35px;
+    text-align: center;
+    color: var(--color-text-muted, #6c757d);
+    position: relative;
+    padding-right: 5px;
+}
+
+/* 🥇 Highlight for Gold (1st) */
+.leaderboard-list li:nth-child(1) .rank-number {
+    color: var(--color-gold);
+    font-size: 1.8rem;
+}
+/* 🥈 Highlight for Silver (2nd) */
+.leaderboard-list li:nth-child(2) .rank-number {
+    color: var(--color-silver);
+    font-size: 1.5rem;
+}
+/* 🥉 Highlight for Bronze (3rd) */
+.leaderboard-list li:nth-child(3) .rank-number {
+    color: var(--color-bronze);
+    font-size: 1.5rem;
+}
+  
+.username-text {
+    font-size: 1.1rem; /* Clearer name */
+    font-weight: 700;
+    color: var(--color-text, #333);
+}
+
+/* Visual differentiation for current user (requires JavaScript class assignment) */
+.leaderboard-item.current-user {
+    background-color: #e6f7ff; /* Light blue background */
+    border-left: 4px solid var(--color-primary);
+    padding-left: 16px; 
+}
+  
+.attempt-count-text {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+  
+.leaderboard-item-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+  
+.points-value {
+    font-weight: 800;
+    font-size: 1.2rem; /* Emphasized score */
+    color: var(--color-primary, #007bff);
+}
+  
+.correct-count-text {
+    color: var(--color-accent, #28a745); /* Highlight correct count */
+    font-size: 0.85rem;
+    font-weight: 600;
+}

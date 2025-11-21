@@ -1,0 +1,162 @@
+/*
+|--------------------------------------------------------------------------
+| VARIABLES & BASE STYLES
+|--------------------------------------------------------------------------
+*/
+:root {
+  --bg: #f7f7fb;
+  --card: #fff;
+  --accent: #2563eb;        /* Primary Blue */
+  --accent-dark: #1e40af;   /* Darker Blue for hover */
+  --text-primary: #111827;  /* Dark text */
+  --text-muted: #6b7280;    /* Muted text for hints */
+  --shadow-color: rgba(16, 24, 40, 0.08); /* Card shadow */
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Arial;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.4; /* Improved readability */
+}
+
+/*
+|--------------------------------------------------------------------------
+| LAYOUT & CARD ELEMENTS
+|--------------------------------------------------------------------------
+*/
+
+.nav {
+  padding: 14px 20px; /* Slightly more vertical padding */
+  background: var(--card);
+  display: flex;
+  gap: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Stronger shadow for nav bar */
+}
+
+.container {
+  padding: 30px 20px; /* Increased top/bottom padding */
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+.card {
+  background: var(--card);
+  padding: 20px; /* Increased card padding */
+  border-radius: 10px; /* Slightly rounder corners */
+  box-shadow: 0 8px 24px var(--shadow-color); /* Deeper shadow */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
+}
+
+/*
+|--------------------------------------------------------------------------
+| FORM ELEMENTS & INPUTS
+|--------------------------------------------------------------------------
+*/
+
+.form label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form input,
+.form select,
+.form textarea {
+  width: 100%;
+  padding: 10px 12px; /* Defined, larger padding */
+  margin-top: 6px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db; /* Clean, light border */
+  border-radius: 6px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--card);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  border-color: var(--accent); /* Highlight border on focus */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* Subtle blue glow */
+  outline: none;
+}
+
+.form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/*
+|--------------------------------------------------------------------------
+| BUTTONS
+|--------------------------------------------------------------------------
+*/
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px; /* Larger padding for prominence */
+  cursor: pointer;
+  margin-top: 12px;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px); /* Subtle lift on hover */
+}
+
+button:disabled {
+    background: #9ca3af; /* Muted gray */
+    cursor: not-allowed;
+    transform: none;
+}
+
+/*
+|--------------------------------------------------------------------------
+| QUIZ & RESULT SPECIFIC ELEMENTS
+|--------------------------------------------------------------------------
+*/
+
+.question-card,
+.result-card {
+  background: #fcfcfd; /* Slightly different background for sub-card */
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08); /* Clean border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03); /* Very light internal shadow */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 10px 12px; /* Better padding for click area */
+  border-radius: 6px;
+  margin: 8px 0;
+  cursor: pointer;
+  border: 1px solid transparent; 
+  transition: all 0.15s ease;
+  color: var(--text-primary);
+}
+
+ul li:hover {
+    background: #f3f4f6; /* Light gray on hover */
+    border-color: #e5e7eb;
+}
+
+ul li.selected {
+  background: #eef2ff; /* Light accent background */
+  border-color: var(--accent); /* Accent border */
+  font-weight: 500;
+}

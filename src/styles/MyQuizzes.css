@@ -1,0 +1,482 @@
+/*
+|--------------------------------------------------------------------------
+| VARIABLES & BASE STYLES
+|--------------------------------------------------------------------------
+*/
+
+:root {
+  /* Retained your original colors */
+  --color-primary: #007bff;
+  --color-accent: #28a745; 
+  --color-text: #333;
+  --color-text-muted: #6c757d;
+  --color-background: #f4f7f9;
+  --color-card-bg: #ffffff;
+  --color-border-light: rgba(0, 0, 0, 0.1);
+  --color-separator: rgba(0, 0, 0, 0.08);
+  --color-shadow-medium: rgba(0, 0, 0, 0.08);
+  --color-danger: #dc3545;
+  --radius-default: 6px; /* Increased slightly for modern feel */
+  --radius-large: 10px; /* Increased for softer, modern card edges */
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.5; /* Added line height for better body text readability */
+}
+
+/*
+|--------------------------------------------------------------------------
+| LAYOUT & UTILITY (Increased Max Width)
+|--------------------------------------------------------------------------
+*/
+
+.app-container-max {
+  /* INCREASED MAX WIDTH for better screen utilization */
+  max-width: 1024px; 
+  margin: 0 auto;
+  padding: 30px 20px; /* More vertical padding */
+}
+
+.header-impact {
+  font-size: 1.8rem; /* Larger, more impactful heading */
+  font-weight: 800;
+  margin: 0;
+  color: #212529;
+}
+
+.header-flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* Align bottom edges for a clean look */
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-separator); /* Clean separator */
+}
+
+.text-muted-small {
+  font-size: 0.85rem; /* Slightly larger for readability */
+  color: var(--color-text-muted);
+}
+
+.loading-state,
+.alert-error-prominent {
+  padding: 15px; /* More padding */
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--radius-default);
+  text-align: center;
+  margin: 15px 0;
+}
+
+.alert-error-prominent {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.card-empty-state {
+  padding: 30px; /* Increased padding */
+  background: #e6f7ff; 
+  border: 1px dashed #91d5ff;
+  border-radius: var(--radius-large);
+  color: var(--color-text);
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| QUIZ LIST & CARD STYLES
+|--------------------------------------------------------------------------
+*/
+
+.quiz-list-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* More spacing between cards */
+  margin-top: 15px;
+}
+
+.quiz-card-item {
+  padding: 20px; /* Increased padding */
+  background: var(--color-card-bg);
+  border-radius: var(--radius-large); 
+  box-shadow: 0 6px 16px var(--color-shadow-medium); /* Slightly stronger shadow */
+  border: 1px solid #e0e6ed; /* Slightly cleaner border color */
+  transition: all 0.2s ease;
+}
+
+.quiz-card-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.quiz-card-grid-layout {
+  /* WIDER GRID LAYOUT: Main content (flexible) and Action Column (fixed width) */
+  display: grid;
+  grid-template-columns: 1fr 220px; /* Slightly wider action column */
+  gap: 30px; /* More gap */
+  align-items: flex-start;
+}
+
+.quiz-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.quiz-title-prominent {
+  font-size: 1.25rem; /* More prominent title */
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.quiz-status-metadata {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-badge {
+  padding: 3px 10px; /* More padding */
+  border-radius: var(--radius-default);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-public {
+  background: #dbeafe; /* Lighter blue */
+  color: #1e40af;
+}
+
+.status-private {
+  background: #fef3c7; 
+  color: #92400e;
+}
+
+.quiz-description-text {
+  font-size: 0.95rem;
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| STATISTICS ROW
+|--------------------------------------------------------------------------
+*/
+
+.quiz-stats-row {
+  display: flex;
+  gap: 40px; /* Increased gap */
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-separator);
+  margin-bottom: 15px;
+}
+
+.stat-group {
+  /* For wider layout, let them flex slightly if needed */
+}
+
+.stat-label {
+  font-size: 0.8rem; /* Clearer label */
+  color: #94a3b8;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-weight: 800;
+  font-size: 1.2rem; /* More impact */
+  color: var(--color-text);
+}
+
+.stat-value-small {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+/*
+|--------------------------------------------------------------------------
+| PRIVATE LINK BLOCK
+|--------------------------------------------------------------------------
+*/
+
+.private-link-block {
+  display: flex;
+  padding: 15px;
+  border-radius: var(--radius-default);
+  border: 1px dashed #a5b4fc; 
+  background: #f7f9ff; /* Very subtle light blue background */
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.private-link-details {
+  flex-grow: 1;
+  margin-right: 15px;
+  color: #334155;
+}
+
+.private-link-header {
+  font-weight: 700;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.private-link-code {
+  font-size: 0.85rem;
+  color: #475569;
+  display: block;
+  word-break: break-all;
+}
+
+.private-link-expiry {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| BUTTONS & ACTION COLUMN
+|--------------------------------------------------------------------------
+*/
+
+.button-tray-inline {
+  display: flex;
+  gap: 10px; 
+  flex-shrink: 0;
+}
+
+.button-tray-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Increased spacing */
+  width: 100%;
+}
+
+.button-action {
+  padding: 10px 14px; /* More padding */
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* Primary Button Variants */
+.button-generate-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+.button-generate-primary:hover {
+  background-color: #0056b3;
+}
+
+.button-leaderboard-accent {
+  background-color: var(--color-accent); 
+  color: white;
+  box-shadow: 0 2px 5px rgba(40, 167, 69, 0.4); /* Subtle shadow for accent */
+}
+.button-leaderboard-accent:hover {
+  background-color: #1e7e34;
+}
+
+.button-primary-icon {
+  background-color: var(--color-primary);
+  color: white;
+}
+.button-primary-icon:hover {
+  background-color: #0056b3;
+}
+
+/* Ghost/Outline Button Variants */
+.button-primary-ghost {
+  background: none;
+  color: var(--color-primary);
+  border: 1px solid #b3d9ff; /* Lighter border for clean ghost look */
+}
+.button-primary-ghost:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.button-secondary-ghost, .button-ghost-secondary {
+  background: none;
+  color: var(--color-text-muted);
+  border: 1px solid #cdd4da;
+}
+.button-secondary-ghost:hover, .button-ghost-secondary:hover {
+  background: var(--color-text-muted);
+  color: white;
+}
+
+.quiz-action-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: stretch;
+  padding-left: 30px; /* Increased padding */
+  border-left: 1px solid var(--color-separator);
+  justify-content: center; /* Center buttons vertically */
+}
+
+/*
+|--------------------------------------------------------------------------
+| MODAL STYLES
+|--------------------------------------------------------------------------
+*/
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* Darker backdrop */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200; 
+}
+
+.modal-content-large {
+  width: min(950px, 96%); /* Wider modal */
+  max-height: 90vh;
+  overflow: auto;
+  background: var(--color-card-bg); 
+  border-radius: 12px;
+  padding: 30px; /* More padding */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.modal-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-separator);
+}
+
+.section-header-xlarge {
+    font-size: 1.6rem; /* Larger modal title */
+    font-weight: 800;
+    margin: 0;
+}
+
+/*
+|--------------------------------------------------------------------------
+| MODAL TABLE STYLES
+|--------------------------------------------------------------------------
+*/
+.data-table-compact {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+.data-table-compact th,
+.data-table-compact td {
+  padding: 12px 10px; /* More padding */
+  text-align: left;
+}
+
+.data-table-compact thead tr {
+  border-bottom: 2px solid var(--color-border-light);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.data-table-compact tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.15s;
+}
+
+.data-table-compact tbody tr:hover {
+  background-color: #f7f9fb;
+}
+
+.data-table-compact tbody tr:last-child {
+  border-bottom: none;
+}
+
+.highlight-row {
+  background-color: #f0fff4; /* Light green highlight */
+  font-weight: 700;
+  color: #1e7e34;
+}
+
+.rank-cell {
+  font-weight: 800;
+  color: var(--color-primary);
+  font-size: 1.1em;
+}
+
+.text-muted-center {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-top: 15px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| RESPONSIVE DESIGN (Ensuring clean collapse on mobile)
+|--------------------------------------------------------------------------
+*/
+
+@media (max-width: 1050px) {
+  .app-container-max {
+      padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Switch to single column stack on tablet/mobile */
+  .quiz-card-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .quiz-action-column {
+    border-left: none;
+    padding-left: 0;
+    order: -1; 
+    margin-bottom: 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--color-separator);
+  }
+  .quiz-stats-row {
+    gap: 25px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .private-link-block {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .button-tray-inline {
+    margin-top: 15px;
+    justify-content: space-between;
+  }
+  .private-link-details {
+    margin-right: 0;
+  }
+  .stat-group {
+    /* Ensure stats take full width if space is tight */
+    width: 45%; 
+  }
+}
