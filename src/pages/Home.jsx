@@ -204,7 +204,7 @@ export default function Home() {
           Instantly Generate & Share Engaging Quizzes
         </h1>
         <p style={styles.heroSubtitle}>
-          Leverage **GenAI** to create interactive quizzes on any topic in seconds, and challenge your community with timed sessions.
+          Leverage <strong>GenAI</strong> to create interactive quizzes on any topic in seconds, and challenge your community with timed sessions.
         </p>
       </div>
       
@@ -216,7 +216,7 @@ export default function Home() {
       </div>
 
       <div style={styles.tipText}>
-        <strong style={{ fontWeight: 700, color: 'var(--text)' }}>New User Tip:</strong> Start with the **Create a Quiz** option to see the AI generator in action! Quizzes are saved automatically to your profile.
+        <strong style={{ fontWeight: 700, color: 'var(--text)' }}>New User Tip:</strong> Start with the <strong>Create a Quiz</strong> option to see the AI generator in action! Quizzes are saved automatically to your profile.
       </div>
 
       {/* --- NEW SECTION: HOW IT WORKS --- */}
